@@ -19,7 +19,8 @@ public class SoundPlayer {
                 if (clip != null) {
                     clipCache.put(path, clip);
                 } else {
-                    System.err.println("Erro ao carregar som: " + path);
+                    // Se não conseguiu carregar, apenas retorna silenciosamente
+                    // Isso permite que o jogo continue funcionando sem áudio
                     return;
                 }
             }
@@ -31,9 +32,14 @@ public class SoundPlayer {
             clip.setFramePosition(0);
             clip.start();
             
+        } catch (IllegalStateException e) {
+            // Clip pode ter sido fechado ou não está mais disponível
+            // Remove do cache e tenta novamente na próxima vez
+            clipCache.remove(path);
         } catch (Exception e) {
-            System.err.println("Erro ao tocar som: " + e.getMessage());
-            e.printStackTrace();
+            // Erro ao tocar som - apenas loga e continua
+            // Não quebra o jogo se o áudio falhar
+            System.err.println("Erro ao tocar som: " + path + " - " + e.getMessage());
         }
     }
     

@@ -1,7 +1,7 @@
 package br.thelokys.world;
 
-import br.thelokys.constants.Screen;
 import br.thelokys.constants.Tiles;
+import br.thelokys.core.GameSettings;
 import br.thelokys.shared.GameContext;
 import br.thelokys.shared.GameObject;
 
@@ -16,9 +16,26 @@ public class Camera extends GameObject {
    * Atribuir valores da camera baseado na tela
    */
   public Camera() {
-    super(0, 0, Screen.MAX_SCREEN_WIDTH, Screen.MAX_SCREEN_HEIGHT);
+    super(0, 0, getDefaultWidth(), getDefaultHeight());
     this.baseX = 0;
     this.baseY = 0;
+  }
+  
+  private static int getDefaultWidth() {
+    return GameSettings.get().getWidth();
+  }
+  
+  private static int getDefaultHeight() {
+    return GameSettings.get().getHeight();
+  }
+  
+  /**
+   * Atualiza o tamanho da câmera quando a resolução muda
+   */
+  public void updateSize() {
+    var settings = GameSettings.get();
+    this.width = settings.getWidth();
+    this.height = settings.getHeight();
   }
 
   /*

@@ -88,4 +88,24 @@ public class GameContext {
     return spawnerSystem;
   }
 
+  /**
+   * Reseta o jogo para o estado inicial
+   */
+  public void resetGame() {
+    // Reseta os sistemas
+    this.enemiesSystem = new EnemySystem();
+    this.spawnerSystem = new SpawnerSystem();
+    this.gemDropsSystem = new GemDropsSystem();
+    
+    // Reseta a câmera
+    this.camera = new Camera();
+    
+    // Recria o player na posição inicial com HP máximo
+    var coords = this.terrain.findSpawnOf(Tiles.PLAYER_SYMBOL);
+    this.player = new Player(coords[0] * Tiles.MAX_TILE_SIZE, coords[1] * Tiles.MAX_TILE_SIZE);
+    
+    // Reseta o HUD
+    this.hud = new Hud();
+  }
+
 }
