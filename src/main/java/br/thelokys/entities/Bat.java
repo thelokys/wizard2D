@@ -8,6 +8,7 @@ import br.thelokys.entities.stats.Health;
 import br.thelokys.loaders.LoaderImage;
 import br.thelokys.shared.Animator;
 import br.thelokys.shared.GameContext;
+import br.thelokys.shared.GameObject;
 import br.thelokys.shared.SpriteSheet;
 
 enum BatSprite {
@@ -49,6 +50,9 @@ public class Bat extends Enemy {
     var player = GameContext.get().getPlayer();
     var enemies = GameContext.get().getEnemiesSystem().getEnemies();
 
+    // Atualiza direção do sprite baseado na posição do jogador
+    updateDirectionSprite(player);
+
     // Movimentação
     follow(player);
     avoidOtherEnemies(enemies);
@@ -59,6 +63,28 @@ public class Bat extends Enemy {
 
     // Animação
     animator.update();
+  }
+
+  private void updateDirectionSprite(GameObject target) {
+    var dx = target.getX() - this.x;
+    
+    BatSprite newSprite;
+    if (dx < 0) {
+      // Jogador está à esquerda, morcego deve olhar para esquerda
+      newSprite = BatSprite.FLY_LEFT;
+    } else if (dx > 0) {
+      // Jogador está à direita, morcego deve olhar para direita
+      newSprite = BatSprite.FLY_RIGHT;
+    } else {
+      // Se dx == 0, mantém o sprite atual
+      return;
+    }
+
+    // Só atualiza se a direção mudou
+    if (this.currentSprite != newSprite) {
+      this.currentSprite = newSprite;
+      this.animator.playAnimation(this.currentSprite.name());
+    }
   }
 
   @Override

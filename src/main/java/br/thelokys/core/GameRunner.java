@@ -55,8 +55,21 @@ public abstract class GameRunner extends JPanel implements Runnable {
   }
 
   public void startGame() {
-    this.running = true;
-    this.gameLoop = new Thread(this);
-    this.gameLoop.start();
+    if (!this.running) {
+      this.running = true;
+      this.gameLoop = new Thread(this);
+      this.gameLoop.start();
+    }
+  }
+
+  public void stopGame() {
+    this.running = false;
+    if (this.gameLoop != null) {
+      try {
+        this.gameLoop.join(100); // Espera até 100ms para a thread terminar
+      } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+      }
+    }
   }
 }
