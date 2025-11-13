@@ -1,0 +1,47 @@
+# Configuração padrão para detectar arquivos de texto
+* text=auto
+
+# Força LF para arquivos de código Java
+*.java text eol=lf
+*.javax text eol=lf
+
+# Arquivos de configuração Maven
+pom.xml text eol=lf
+*.properties text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.xml text eol=lf
+
+# Arquivos de script e documentação
+*.md text eol=lf
+*.txt text eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
+
+# Arquivos de configuração IDE
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.classpath text eol=lf
+.project text eol=lf
+.settings/** text eol=lf
+
+# Arquivos de origem web (se houver)
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+
+# Arquivos binários - NÃO converter
+*.jar binary
+*.war binary
+*.ear binary
+*.class binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+
+# Arquivos do Maven wrapper (importante!)
+mvnw text eol=lf
+mvnw.cmd text eol=lf

@@ -1,0 +1,64 @@
+{
+  "branches": {
+    "fire": {
+      "name": "Fogo",
+      "skills": [
+        { "name": "Chama Inicial", "desc": "Lança uma pequena bola de fogo que causa dano moderado em um inimigo." },
+        { "name": "Incandescência", "desc": "Ataques de fogo aplicam queimadura contínua por 3s." },
+        { "name": "Pirocinese", "desc": "Dobra a velocidade de conjuração de feitiços de fogo." },
+        { "name": "Tempestade de Fogo", "desc": "Cria uma chuva de chamas ao redor, causando dano em área." },
+        { "name": "Coração de Vulcão", "desc": "Cada inimigo derrotado com fogo aumenta temporariamente seu poder mágico." }
+      ]
+    },
+    "ice": {
+      "name": "Gelo",
+      "skills": [
+        { "name": "Toque Gélido", "desc": "Lança um projétil de gelo que reduz a velocidade do inimigo." },
+        { "name": "Aura Invernal", "desc": "Inimigos próximos são constantemente desacelerados." },
+        { "name": "Congelamento Profundo", "desc": "Inimigos com baixa vida podem ser congelados completamente." },
+        { "name": "Espinhos de Gelo", "desc": "Estilhaços emergem do chão causando dano em área." },
+        { "name": "Coração Congelado", "desc": "Reduz o dano recebido enquanto estiver parado." }
+      ]
+    },
+    "arcane": {
+      "name": "Arcano",
+      "skills": [
+        { "name": "Raio Arcano", "desc": "Dispara um feixe de energia pura em linha reta." },
+        { "name": "Teleporte", "desc": "Move-se instantaneamente para uma posição próxima." },
+        { "name": "Pulso Temporal", "desc": "Restaura parcialmente o cooldown de todas as magias." },
+        { "name": "Sobrecarga", "desc": "Conjurar feitiços rapidamente aumenta seu poder, mas drena mana mais rápido." },
+        { "name": "Essência Arcana", "desc": "Regenera mana mais rápido conforme derrota inimigos." }
+      ]
+    },
+    "shadow": {
+      "name": "Sombras",
+      "skills": [
+        { "name": "Dreno Sombrio", "desc": "Rouba vida ao atingir inimigos." },
+        { "name": "Névoa Sombria", "desc": "Cria uma névoa que reduz a visão e precisão dos inimigos." },
+        { "name": "Pacto Obscuro", "desc": "Aumenta drasticamente o dano, mas reduz a vida máxima." },
+        { "name": "Passo Sombrio", "desc": "Avança em alta velocidade deixando uma sombra ilusória." },
+        { "name": "Devorador de Almas", "desc": "Cada inimigo derrotado aumenta temporariamente seu poder sombrio." }
+      ]
+    },
+    "elemental": {
+      "name": "Elemental",
+      "skills": [
+        { "name": "Explosão Elemental", "desc": "Lança uma onda mista de fogo, gelo e raio." },
+        { "name": "Afinidade Elemental", "desc": "Reduz custo de mana de todos os feitiços." },
+        { "name": "Convergência", "desc": "Feitiços de um elemento fortalecem o próximo conjurado de outro tipo." },
+        { "name": "Pele Elemental", "desc": "Ganha resistência mágica baseada nos elementos dominados." },
+        { "name": "Avatar Elemental", "desc": "Entra em estado de poder total, liberando múltiplos elementos ao atacar." }
+      ]
+    },
+    "wisdom": {
+      "name": "Sabedoria",
+      "skills": [
+        { "name": "Mente Expansiva", "desc": "Aumenta a mana máxima." },
+        { "name": "Concentração Arcana", "desc": "Reduz o tempo de conjuração de todos os feitiços." },
+        { "name": "Vitalidade Mística", "desc": "Aumenta a vida máxima em 20%." },
+        { "name": "Domínio dos Elementos", "desc": "Pequeno bônus de dano para todos os tipos de magia." },
+        { "name": "Instinto de Batalha", "desc": "Ao ser atingido, há chance de disparar automaticamente um feitiço básico." }
+      ]
+    }
+  }
+}
