@@ -1,0 +1,105 @@
+name: Build and Release Java Game
+
+on:
+  push:
+    tags: ['v*']  # Executa quando você criar uma tag com 'v'
+  workflow_dispatch:  # Permite executar manualmente
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Build with Maven
+      run: |
+        # Cria um pom.xml simples se não tiver
+        if [ ! -f pom.xml ]; then
+          cat > pom.xml << 'EOF'
+        <project>
+          <modelVersion>4.0.0</modelVersion>
+          <groupId>br.thelokys</groupId>
+          <artifactId>wizard2d</artifactId>
+          <version>1.0.0</version>
+          <properties>
+            <maven.compiler.source>17</maven.compiler.source>
+            <maven.compiler.target>17</maven.compiler.target>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+          </properties>
+          <build>
+            <plugins>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+              </plugin>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                  <archive>
+                    <manifest>
+                      <mainClass>br.thelokys.Main</mainClass>
+                    </manifest>
+                  </archive>
+                </configuration>
+              </plugin>
+            </plugins>
+          </build>
+        </project>
+        EOF
+        fi
+        
+        # Compila o projeto
+        find src -name "*.java" > sources.txt
+        javac -d build @sources.txt
+        
+        # Cria o JAR
+        jar cfm wizard2D.jar MANIFEST.MF -C build .
+        
+    - name: Create JAR manually
+      run: |
+        # Cria diretório de build
+        mkdir -p build
+        
+        # Compila todos os arquivos Java
+        find src -name "*.java" | xargs javac -d build
+        
+        # Cria MANIFEST.MF
+        mkdir -p META-INF
+        echo "Main-Class: br.thelokys.Main" > META-INF/MANIFEST.MF
+        echo "Class-Path: ." >> META-INF/MANIFEST.MF
+        
+        # Cria o JAR
+        jar cfm wizard2D.jar META-INF/MANIFEST.MF -C build .
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          wizard2D.jar
+          README.md
+        body: |
+          🎮 **The Lokys - Java 2D Game**
+          
+          ### Como Jogar:
+          1. Baixe o `wizard2D.jar`
+          2. Execute: `java -jar wizard2D.jar`
+          3. Use **WASD** para mover
+          
+          ⚠️ Requer Java 17 ou superior.
+          
+          ---
+          *Build automático via GitHub Actions*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
