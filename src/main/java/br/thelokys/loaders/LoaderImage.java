@@ -17,10 +17,14 @@ public class LoaderImage {
     }
 
     try {
-      BufferedImage img = ImageIO.read(LoaderImage.class.getResourceAsStream(path));
-      cache.put(path, img);
+      var stream = ResourceHelper.getResourceStream(path);
+      if (stream == null) {
+        throw new IOException("Image resource not found: " + path);
+      }
 
-      return ImageIO.read(LoaderImage.class.getResourceAsStream(path));
+      BufferedImage img = ImageIO.read(stream);
+      cache.put(path, img);
+      return img;
     } catch (IOException e) {
       System.err.println("Não foi possível carregar a imagem: " + path);
       e.printStackTrace();
