@@ -17,21 +17,31 @@
     <build>
         <finalName>wizard2D</finalName>
         <resources>
-          <resource>
-              <directory>src/main/resources</directory>
-              <includes>
-                  <include>**/*</include>
-              </includes>
-          </resource>
-          <resource>
-              <directory>src</directory>
-              <includes>
-                  <include>**/*.png</include>
-                  <include>**/*.jpg</include>
-                  <include>**/*.wav</include>
-                  <include>**/*.txt</include>
-              </includes>
-          </resource>
+            <!-- Inclui TUDO de src/main/resources -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+            <!-- Inclui recursos da pasta src/ também -->
+            <resource>
+                <directory>src</directory>
+                <includes>
+                    <include>**/*.png</include>
+                    <include>**/*.jpg</include>
+                    <include>**/*.jpeg</include>
+                    <include>**/*.gif</include>
+                    <include>**/*.wav</include>
+                    <include>**/*.mp3</include>
+                    <include>**/*.ogg</include>
+                    <include>**/*.txt</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.ttf</include>
+                    <include>**/*.fnt</include>
+                </includes>
+            </resource>
         </resources>
         <plugins>
             <plugin>
@@ -55,6 +65,17 @@
                                     <mainClass>br.thelokys.Main</mainClass>
                                 </transformer>
                             </transformers>
+                            <!-- INCLUI todos os recursos -->
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
